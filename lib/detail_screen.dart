@@ -1,15 +1,95 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'model/course.dart';
 
 var informationTextStyle = TextStyle(fontFamily: 'Oxygen');
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   final Courses course;
 
   DetailScreen({required this.course});
 
   @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  @override
   Widget build(BuildContext context) {
+    Future<void> showSuccessDialog() async {
+      return showDialog(
+        context: context,
+        builder: (BuildContext context) => Container(
+          child: AlertDialog(
+            backgroundColor: Colors.grey,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            content: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.close,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    'Success :)',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    'anda sudah terdaftar pada kelas ini',
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Container(
+                    width: 154,
+                    height: 44,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.black54,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: Text(
+                        'mulai kelas',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -17,7 +97,7 @@ class DetailScreen extends StatelessWidget {
           children: <Widget>[
             Stack(
               children: <Widget>[
-                Image.asset(course.imageAsset),
+                Image.asset(widget.course.imageAsset),
                 SafeArea(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -46,7 +126,7 @@ class DetailScreen extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: 16.0),
               child: Text(
-                course.name,
+                widget.course.name,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 30.0,
@@ -65,7 +145,7 @@ class DetailScreen extends StatelessWidget {
                       Icon(Icons.calendar_today),
                       SizedBox(height: 8.0),
                       Text(
-                        course.days,
+                        widget.course.days,
                         style: informationTextStyle,
                       ),
                     ],
@@ -75,7 +155,7 @@ class DetailScreen extends StatelessWidget {
                       Icon(Icons.access_time),
                       SizedBox(height: 8.0),
                       Text(
-                        course.time,
+                        widget.course.time,
                         style: informationTextStyle,
                       ),
                     ],
@@ -85,7 +165,7 @@ class DetailScreen extends StatelessWidget {
                       Icon(Icons.monetization_on),
                       SizedBox(height: 8.0),
                       Text(
-                        course.price,
+                        widget.course.price,
                         style: informationTextStyle,
                       ),
                     ],
@@ -96,7 +176,7 @@ class DetailScreen extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                course.description,
+                widget.course.description,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16.0,
@@ -109,7 +189,9 @@ class DetailScreen extends StatelessWidget {
               width: double.infinity,
               margin: EdgeInsets.all(15),
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showSuccessDialog();
+                  },
                   style: TextButton.styleFrom(
                       backgroundColor: Colors.black87,
                       shape: RoundedRectangleBorder(
