@@ -104,6 +104,20 @@ class DetailScreen extends StatelessWidget {
                 ),
               ),
             ),
+            Container(
+              height: 50,
+              width: double.infinity,
+              margin: EdgeInsets.all(15),
+              child: TextButton(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.black87,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12))),
+                  child: Text(
+                    'Belajar Sekarang',
+                  )),
+            ),
           ],
         ),
       ),

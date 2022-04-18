@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:submission_flutter/detail_screen.dart';
+import 'package:submission_flutter/splash_screen.dart';
 import 'package:submission_flutter/main_screen.dart';
 
 void main() => runApp(MyApp());
@@ -10,7 +10,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Dicoding',
       theme: ThemeData(),
-      home: MainScreen(),
+      routes: {
+        '/': (context) => SplashPage(),
+        '/main': (context) => MainScreen(),
+      },
     );
   }
 }
