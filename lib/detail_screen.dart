@@ -7,7 +7,7 @@ var informationTextStyle = TextStyle(fontFamily: 'Oxygen');
 class DetailScreen extends StatelessWidget {
   final Courses course;
 
-  const DetailScreen({required this.course});
+  const DetailScreen({Key? key, required this.course}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class DetailScreen extends StatelessWidget {
 class DetailWebPage extends StatefulWidget {
   final Courses course;
 
-  const DetailWebPage({required this.course});
+  const DetailWebPage({Key? key, required this.course}) : super(key: key);
 
   @override
   State<DetailWebPage> createState() => _DetailWebPageState();
@@ -35,6 +35,7 @@ class DetailWebPage extends StatefulWidget {
 class _DetailWebPageState extends State<DetailWebPage> {
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     Future<void> showSuccessDialog() async {
       return showDialog(
         context: context,
@@ -117,7 +118,7 @@ class _DetailWebPageState extends State<DetailWebPage> {
           ),
           child: Center(
             child: Container(
-              width: 1200,
+              width: screenWidth <= 1200 ? 800 : 1200,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
